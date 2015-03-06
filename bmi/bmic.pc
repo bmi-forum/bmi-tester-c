@@ -1,0 +1,6 @@
+Name: Bmi
+Description: The Basic Model Interface
+Version: 0.1
+Requires: glib-2.0 >= 2.40
+Libs: -L/Users/huttone/git/bmi-forum/bmi-tester/_inst/lib -lbmic
+Cflags: -I/Users/huttone/git/bmi-forum/bmi-tester/_inst/include

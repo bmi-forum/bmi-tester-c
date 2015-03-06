@@ -1,0 +1,33 @@
+cmake_minimum_required(VERSION 2.6)
+
+project (bmi)
+
+set (BMI_VERSION 0.1)
+
+include(FindPkgConfig)
+pkg_check_modules(GMODULE2 gmodule-2.0)
+pkg_check_modules(GMODULE2 glib-2.0)
+include_directories(${GMODULE2_INCLUDE_DIRS} ${GLIB2_INCLUDE_DIRS})
+link_directories(${GMODULE2_LIBRARY_DIRS} ${GLIB2_LIBRARY_DIRS})
+
+set (BUILD_SHARED_LIBS ON)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/..)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+
+########### test main ###############
+
+set (bmi_test_sources test_everything.c test_info_funcs.c test_time_funcs.c)
+add_executable (bmi_test ${bmi_test_sources})
+
+target_link_libraries(bmi_test ${GMODULE2_LIBRARIES} ${GLIB2_LIBRARIES} bmic)
+#target_link_libraries(bmi_test bmic)
+
+########### Install files ###############
+
+install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/bmi_test DESTINATION bin)
+
+message("----------------------------------------")
+message("gmodule libraries: ${GMODULE2_LIBRARIES}")
+message("gmodule library dirs: ${GMODULE2_LIBRARY_DIRS}")
+message("----------------------------------------")
